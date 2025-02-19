@@ -10,5 +10,8 @@ setup(
         'pandas',
         'numpy',
         'scikit-learn',
+        'pytest',
+        'pytest-cov',
+        'httpx'
     ],
 )
