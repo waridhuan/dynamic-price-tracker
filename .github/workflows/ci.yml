@@ -27,3 +27,21 @@ jobs:
     - name: Run tests with pytest
       run: |
         python -m pytest tests/ --cov=src --cov-report=xml -v
+
+    - name: Run unit tests
+      run: |
+        pytest tests/ --cov=src --cov-report=term-missing
+    
+    - name: Run integration tests
+      run: |
+        pytest integration_tests/
+    
+    - name: Run security scans
+      uses: SonarSource/sonarcloud-github-action@v1.5
+      with:
+        projectBaseDir: .
+        args: >
+          -Dsonar.projectKey=my_project_key
+          -Dsonar.organization=my_organization
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }}
